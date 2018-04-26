@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @Author Joker
@@ -29,6 +31,15 @@ public class BibliotecaControllerTest {
         controller.begin();
         assertEquals(systemOut(), result);
     }
+
+    @Test
+    public void testValidateNumber() {
+        assertTrue(controller.validate("1"));
+        assertTrue(controller.validate("0"));
+        assertFalse(controller.validate("s"));
+    }
+
+
 
     private String systemOut() {
         return outContent.toString();

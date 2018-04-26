@@ -16,5 +16,7 @@ public class BibliotecaController {
     }
 
 
-
+    public boolean validate(String input) {
+        return "1".equals(input) || "0".equals(input);
+    }
 }
