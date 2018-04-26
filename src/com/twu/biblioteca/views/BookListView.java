@@ -16,4 +16,12 @@ public class BookListView {
         books.forEach(book -> System.out.println(book.getName() + "  " + book.getAuthor()
                 + "  " + book.getYear()));
     }
+
+    public void showCheckOutFail() {
+        System.out.println("That book is not available.");
+    }
+
+    public void showCheckOutSuccess() {
+        System.out.println("Thank you! Enjoy the book");
+    }
 }
