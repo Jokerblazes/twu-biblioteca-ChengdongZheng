@@ -1,10 +1,16 @@
 package com.twu.biblioteca.controllers;
 
+import com.twu.biblioteca.core.Book;
+import com.twu.biblioteca.core.BookList;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -22,12 +28,23 @@ public class BibliotecaControllerTest {
     @Before
     public void setUp() {
         System.setOut(new PrintStream(outContent));
-        controller = new BibliotecaController();
+
+        //book list
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("Book1","Jack",2000));
+        books.add(new Book("Book2","Jim",1990));
+        books.add(new Book("Book3","Tom",1991));
+
+        //rented book list
+        List<Book> rentedBooks = new ArrayList<>();
+        rentedBooks.add(new Book("Book9","Jack1",2000));
+        controller = new BibliotecaController(new BookList(books,rentedBooks));
+
     }
 
     @Test
     public void testBegin() {
-        String result = "Welcome Biblioteca!\n1:List Books\n0:Quit\n";
+        String result = "Welcome Biblioteca!\n1:List Books\n2:Return Book\n0:Quit\n";
         controller.begin();
         assertEquals(systemOut(), result);
     }
@@ -53,9 +70,10 @@ public class BibliotecaControllerTest {
 
     @Test
     public void testIsReturnBook() {
-        assertTrue(controller.returnBook("2"));
-        assertFalse(controller.returnBook("0"));
+        assertTrue(controller.needReturnBook("2"));
+        assertFalse(controller.needReturnBook("0"));
     }
+
 
 
     private String systemOut() {

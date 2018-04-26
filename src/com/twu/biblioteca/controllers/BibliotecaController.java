@@ -4,6 +4,7 @@ import com.twu.biblioteca.core.BookList;
 import com.twu.biblioteca.views.BibliotecaView;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
@@ -34,7 +35,7 @@ public class BibliotecaController {
 
 
     public boolean validate(String input) {
-        return needQuit(input) || needEnterBookList(input) || returnBook(input);
+        return needQuit(input) || needEnterBookList(input) || needReturnBook(input);
     }
 
     public boolean needQuit(String input) {
@@ -45,9 +46,38 @@ public class BibliotecaController {
         return "1".equals(input);
     }
 
-    public boolean returnBook(String input) {
+    public boolean needReturnBook(String input) {
         return "2".equals(input);
     }
 
 
+    public void start() throws IOException {
+        begin();
+
+        String input = bufferedReader.readLine();
+        if (needQuit(input))
+            return;
+
+        enterBookList(input);
+
+        returnBook(input);
+
+        if (!validate(input))
+            bibliotecaView.invalidMenuOptionMessage();
+
+        start();
+    }
+
+    private void returnBook(String input) throws IOException {
+        if (needReturnBook(input)) {
+            bookList.returnBook(bufferedReader.readLine());
+        }
+    }
+
+    private void enterBookList(String input) throws IOException {
+        if (needEnterBookList(input)) {
+            bookList.showBookList();
+            bookList.checkOutBook(bufferedReader.readLine());
+        }
+    }
 }
