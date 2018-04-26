@@ -16,9 +16,9 @@ public class BookListController {
     private List<Book> books;
     private List<Book> rentedBooks;
 
-    public BookListController(List<Book> books) {
+    public BookListController(List<Book> books,List<Book> rentedBooks) {
         this.books = books;
-        rentedBooks = new ArrayList<>();
+        this.rentedBooks = rentedBooks;
     }
 
     public void showBookList() {
@@ -40,5 +40,21 @@ public class BookListController {
             bookListView.showCheckOutFail();
         else
             books.remove(index);
+    }
+
+    public void returnBook(String name) {
+        int index = -1;
+        for (int i = 0; i < rentedBooks.size(); i++) {
+            if (rentedBooks.get(i).getName().equals(name)) {
+                books.add(rentedBooks.get(i));
+                index = i;
+                bookListView.showReturnSuccess();
+                break;
+            }
+        }
+        if (index == -1)
+            bookListView.showReturnFail();
+        else
+            rentedBooks.remove(index);
     }
 }

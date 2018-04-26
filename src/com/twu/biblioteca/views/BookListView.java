@@ -24,4 +24,12 @@ public class BookListView {
     public void showCheckOutSuccess() {
         System.out.println("Thank you! Enjoy the book");
     }
+
+    public void showReturnSuccess() {
+        System.out.println("Thank you for returning the book.");
+    }
+
+    public void showReturnFail() {
+        System.out.println("That is not a valid book to return.");
+    }
 }
