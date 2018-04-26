@@ -1,9 +1,9 @@
 package com.twu.biblioteca.controllers;
 
+import com.twu.biblioteca.core.BookList;
 import com.twu.biblioteca.views.BibliotecaView;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
  */
 public class BibliotecaController {
     private BibliotecaView bibliotecaView = new BibliotecaView();
-    private BookListController bookListController;
+    private BookList bookList;
     private BufferedReader bufferedReader;
 
     {
@@ -23,8 +23,8 @@ public class BibliotecaController {
     public BibliotecaController() {
     }
 
-    public BibliotecaController(BookListController bookListController) {
-        this.bookListController = bookListController;
+    public BibliotecaController(BookList bookList) {
+        this.bookList = bookList;
     }
 
     public void begin() {

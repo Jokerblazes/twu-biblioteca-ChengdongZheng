@@ -1,6 +1,5 @@
-package com.twu.biblioteca.controllers;
+package com.twu.biblioteca.core;
 
-import com.twu.biblioteca.core.Book;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,9 +15,9 @@ import static org.junit.Assert.*;
  * @Description
  * @Date Create in 下午4:01 2018/4/26
  */
-public class BookListControllerTest {
+public class BookListTest {
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private BookListController controller;
+    private BookList controller;
     private List<Book> books;
     private List<Book> rentedBooks;
 
@@ -34,7 +33,7 @@ public class BookListControllerTest {
         //rented book list
         rentedBooks = new ArrayList<>();
         rentedBooks.add(new Book("Book9","Jack1",2000));
-        controller = new BookListController(books,rentedBooks);
+        controller = new BookList(books,rentedBooks);
     }
 
     @Test

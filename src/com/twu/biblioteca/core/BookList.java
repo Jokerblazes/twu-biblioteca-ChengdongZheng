@@ -1,9 +1,8 @@
-package com.twu.biblioteca.controllers;
+package com.twu.biblioteca.core;
 
 import com.twu.biblioteca.core.Book;
 import com.twu.biblioteca.views.BookListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,12 +10,12 @@ import java.util.List;
  * @Description
  * @Date Create in 下午4:00 2018/4/26
  */
-public class BookListController {
+public class BookList {
     private BookListView bookListView = new BookListView();
     private List<Book> books;
     private List<Book> rentedBooks;
 
-    public BookListController(List<Book> books,List<Book> rentedBooks) {
+    public BookList(List<Book> books,List<Book> rentedBooks) {
         this.books = books;
         this.rentedBooks = rentedBooks;
     }
