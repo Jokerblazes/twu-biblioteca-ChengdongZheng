@@ -39,6 +39,12 @@ public class BibliotecaControllerTest {
         assertFalse(controller.validate("s"));
     }
 
+    @Test
+    public void testNeedQuit() {
+        assertTrue(controller.needQuit("0"));
+        assertFalse(controller.needQuit("1"));
+    }
+
 
 
     private String systemOut() {

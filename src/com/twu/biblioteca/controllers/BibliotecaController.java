@@ -19,4 +19,8 @@ public class BibliotecaController {
     public boolean validate(String input) {
         return "1".equals(input) || "0".equals(input);
     }
+
+    public boolean needQuit(String input) {
+        return "0".equals(input);
+    }
 }
