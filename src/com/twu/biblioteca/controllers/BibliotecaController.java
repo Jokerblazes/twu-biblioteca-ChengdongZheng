@@ -2,6 +2,10 @@ package com.twu.biblioteca.controllers;
 
 import com.twu.biblioteca.views.BibliotecaView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * @Author Joker
  * @Description
@@ -9,6 +13,19 @@ import com.twu.biblioteca.views.BibliotecaView;
  */
 public class BibliotecaController {
     private BibliotecaView bibliotecaView = new BibliotecaView();
+    private BookListController bookListController;
+    private BufferedReader bufferedReader;
+
+    {
+        bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    public BibliotecaController() {
+    }
+
+    public BibliotecaController(BookListController bookListController) {
+        this.bookListController = bookListController;
+    }
 
     public void begin() {
         bibliotecaView.welcome();
@@ -17,7 +34,7 @@ public class BibliotecaController {
 
 
     public boolean validate(String input) {
-        return "1".equals(input) || "0".equals(input);
+        return needQuit(input) || needEnterBookList(input) || returnBook(input);
     }
 
     public boolean needQuit(String input) {
@@ -27,4 +44,10 @@ public class BibliotecaController {
     public boolean needEnterBookList(String input) {
         return "1".equals(input);
     }
+
+    public boolean returnBook(String input) {
+        return "2".equals(input);
+    }
+
+
 }

@@ -14,4 +14,8 @@ public class BibliotecaView {
     public void showMainMenu() {
         System.out.println("1:List Books\n0:Quit");
     }
+
+    public void invalidMenuOptionMessage() {
+        System.out.println("Select a valid option!");
+    }
 }

@@ -51,6 +51,12 @@ public class BibliotecaControllerTest {
         assertFalse(controller.needEnterBookList("0"));
     }
 
+    @Test
+    public void testIsReturnBook() {
+        assertTrue(controller.returnBook("2"));
+        assertFalse(controller.returnBook("0"));
+    }
+
 
     private String systemOut() {
         return outContent.toString();
