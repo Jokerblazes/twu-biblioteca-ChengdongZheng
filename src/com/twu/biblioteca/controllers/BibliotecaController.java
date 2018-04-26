@@ -23,4 +23,8 @@ public class BibliotecaController {
     public boolean needQuit(String input) {
         return "0".equals(input);
     }
+
+    public boolean needEnterBookList(String input) {
+        return "1".equals(input);
+    }
 }

@@ -45,6 +45,11 @@ public class BibliotecaControllerTest {
         assertFalse(controller.needQuit("1"));
     }
 
+    @Test
+    public void testNeedEnterBookList() {
+        assertTrue(controller.needEnterBookList("1"));
+        assertFalse(controller.needEnterBookList("0"));
+    }
 
 
     private String systemOut() {
