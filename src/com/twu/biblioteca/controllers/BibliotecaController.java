@@ -62,10 +62,14 @@ public class BibliotecaController {
 
         returnBook(input);
 
-        if (!validate(input))
-            bibliotecaView.invalidMenuOptionMessage();
+        showInvalidMenuOptionMessage(input);
 
         start();
+    }
+
+    private void showInvalidMenuOptionMessage(String input) {
+        if (!validate(input))
+            bibliotecaView.invalidMenuOptionMessage();
     }
 
     private void returnBook(String input) throws IOException {
