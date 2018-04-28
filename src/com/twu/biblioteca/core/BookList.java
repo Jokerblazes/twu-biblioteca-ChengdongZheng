@@ -26,34 +26,47 @@ public class BookList {
     }
 
     public void checkOutBook(String name) {
-        int index = -1;
-        for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getName().equals(name)) {
-                rentedBooks.add(books.get(i));
-                index = i;
-                bookListView.showCheckOutSuccess();
-                break;
-            }
-        }
-        if (index == -1)
+        //1:search book from books
+        int index = searchBook(name, books);
+
+        //2:check out book
+        checkOutBook(index);
+    }
+
+    private void checkOutBook(int index) {
+        if (index == -1) {
             bookListView.showCheckOutFail();
-        else
+        } else {
+            rentedBooks.add(books.get(index));
             books.remove(index);
+            bookListView.showCheckOutSuccess();
+        }
     }
 
     public void returnBook(String name) {
-        int index = -1;
-        for (int i = 0; i < rentedBooks.size(); i++) {
-            if (rentedBooks.get(i).getName().equals(name)) {
-                books.add(rentedBooks.get(i));
-                index = i;
-                bookListView.showReturnSuccess();
-                break;
+        //1:search book from rentedBooks
+        int index = searchBook(name,rentedBooks);
+
+        //2:return book
+        returnBook(index);
+    }
+
+    private void returnBook(int index) {
+        if (index == -1) {
+            bookListView.showReturnFail();
+        } else {
+            books.add(rentedBooks.get(index));
+            rentedBooks.remove(index);
+            bookListView.showReturnSuccess();
+        }
+    }
+
+    private int searchBook(String name,List<Book> target) {
+        for (int i = 0; i < target.size(); i++) {
+            if (target.get(i).getName().equals(name)) {
+                return i;
             }
         }
-        if (index == -1)
-            bookListView.showReturnFail();
-        else
-            rentedBooks.remove(index);
+        return -1;
     }
 }
