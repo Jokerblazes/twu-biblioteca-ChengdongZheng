@@ -68,7 +68,7 @@ public class MovieListTest {
 
     @Test
     public void testReturnMovieFail() {
-        movieList.returnMovie("Name4");
+        movieList.returnMovie("Name5");
         String fail = "That is not a valid movie to return.\n";
         assertEquals(systemOut(), fail);
     }
