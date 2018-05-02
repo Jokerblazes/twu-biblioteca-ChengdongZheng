@@ -1,11 +1,21 @@
 package com.twu.biblioteca.core;
 
+import com.twu.biblioteca.exception.LibraryNumberException;
+
 /**
  * @Author Joker
  * @Description
  * @Date Create in 下午4:47 2018/5/2
  */
 public class User {
+
+    private final String libraryNumber;
+    private final String password;
+
+    public User(String libraryNumber, String password) {
+        this.libraryNumber = libraryNumber;
+        this.password = password;
+    }
 
     public static boolean validate(String libraryNumber) {
         if (libraryNumber.length() != 8)
@@ -14,5 +24,12 @@ public class User {
         if (libraryNumber.charAt(3) != '-')
             return false;
         return true;
+    }
+
+
+    public static User createUser(String libraryNumber, String password) throws LibraryNumberException {
+        if (!validate(libraryNumber))
+            throw new LibraryNumberException();
+        return new User(libraryNumber,password);
     }
 }
