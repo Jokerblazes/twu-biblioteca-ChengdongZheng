@@ -12,4 +12,12 @@ public class MovieListView {
         movies.forEach(movie -> System.out.println(movie.getName() + "  " + movie.getDirector()
                 + "  " + movie.getYear() + "  " + movie.getRating()));
     }
+
+    public void showCheckOutFail() {
+        System.out.println("That Movie is not available.");
+    }
+
+    public void showCheckOutSuccess() {
+        System.out.println("Thank you! Enjoy the Movie");
+    }
 }

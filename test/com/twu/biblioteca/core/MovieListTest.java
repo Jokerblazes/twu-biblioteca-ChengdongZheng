@@ -42,6 +42,20 @@ public class MovieListTest {
                 "Name3  Director3  2003  unrated\n");
     }
 
+    @Test
+    public void testCheckOutMovieSuccess() {
+        movieList.checkOutMovie("Name1");
+        String success = "Thank you! Enjoy the Movie\n";
+        assertEquals(systemOut(), success);
+    }
+
+    @Test
+    public void testCheckOutMovieFail() {
+        movieList.checkOutMovie("Name5");
+        String fail = "That Movie is not available.\n";
+        assertEquals(systemOut(), fail);
+    }
+
     private String systemOut() {
         return outContent.toString();
     }
