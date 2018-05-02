@@ -9,6 +9,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 /**
  * @Author Joker
@@ -18,6 +19,10 @@ import java.io.ByteArrayOutputStream;
 public class UserTest {
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outContent));
+    }
 
     @Test
     public void testValidateAccount() {
@@ -41,6 +46,25 @@ public class UserTest {
         } catch (LibraryNumberException e) {
             assertTrue(true);
         }
+    }
+
+    @Test
+    public void testShowInfo() {
+        // create a user
+        User user = null;
+        try {
+             user = User.createUser("xxx-xxxx","123456");
+            assertTrue(true);
+        } catch (LibraryNumberException e) {
+            assertTrue(false);
+        }
+        user.setEmail("1234566@outlook.com");
+        user.setName("Tim");
+        user.setPhoneNumber("12345678");
+
+        //show user information
+        user.showInfo();
+        assertEquals(systemOut(),"Tim  1234566@outlook.com  12345678\n");
     }
 
 

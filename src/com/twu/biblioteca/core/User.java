@@ -11,6 +11,9 @@ public class User {
 
     private final String libraryNumber;
     private final String password;
+    private String phoneNumber;
+    private String name;
+    private String email;
 
     public User(String libraryNumber, String password) {
         this.libraryNumber = libraryNumber;
@@ -31,5 +34,21 @@ public class User {
         if (!validate(libraryNumber))
             throw new LibraryNumberException();
         return new User(libraryNumber,password);
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void showInfo() {
+        System.out.println(name + "  " + email + "  " + phoneNumber);
     }
 }
