@@ -20,4 +20,12 @@ public class MovieListView {
     public void showCheckOutSuccess() {
         System.out.println("Thank you! Enjoy the Movie");
     }
+
+    public void showReturnSuccess() {
+        System.out.println("Thank you for returning the movie.");
+    }
+
+    public void showReturnFail() {
+        System.out.println("That is not a valid movie to return.");
+    }
 }

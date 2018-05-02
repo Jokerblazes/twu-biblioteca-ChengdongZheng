@@ -50,4 +50,23 @@ public class MovieList {
         }
         return -1;
     }
+
+    public void returnMovie(String name) {
+        int index = searchMovie(name,rentedMovies);
+
+        returnMovie(index);
+
+    }
+
+    private void returnMovie(int index) {
+        if (index == -1) {
+            view.showReturnFail();
+        } else {
+            movies.add(rentedMovies.get(index));
+            rentedMovies.remove(index);
+            view.showReturnSuccess();
+        }
+    }
+
+
 }

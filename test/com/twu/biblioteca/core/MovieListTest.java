@@ -31,7 +31,10 @@ public class MovieListTest {
         list.add(movie2);
         list.add(movie3);
 
-        movieList = new MovieList(list);
+        Movie movie4 = new Movie("Name4",2004,"Director4");
+        List<Movie> rentedMovies = new ArrayList<>();
+        rentedMovies.add(movie4);
+        movieList = new MovieList(list,rentedMovies);
     }
 
     @Test
@@ -53,6 +56,20 @@ public class MovieListTest {
     public void testCheckOutMovieFail() {
         movieList.checkOutMovie("Name5");
         String fail = "That Movie is not available.\n";
+        assertEquals(systemOut(), fail);
+    }
+
+    @Test
+    public void testReturnMovieSuccess() {
+        movieList.returnMovie("Name4");
+        String success = "Thank you for returning the movie.\n";
+        assertEquals(systemOut(), success);
+    }
+
+    @Test
+    public void testReturnMovieFail() {
+        movieList.returnMovie("Name4");
+        String fail = "That is not a valid movie to return.\n";
         assertEquals(systemOut(), fail);
     }
 
