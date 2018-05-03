@@ -63,16 +63,18 @@ public class BookListTest {
 
     @Test
     public void testReturnBookSuccess() {
-        controller.returnBook("Book9");
+        Book book = controller.returnBook("Book9");
         String success = "Thank you for returning the book.\n";
         assertEquals(systemOut(),success);
+        assertEquals(book.getName(),"Book9");
     }
 
     @Test
     public void testReturnBookFail() {
         String fail = "That is not a valid book to return.\n";
-        controller.returnBook("Book10");
+        Book book = controller.returnBook("Book10");
         assertEquals(systemOut(), fail);
+        assertNull(book);
     }
 
     private String systemOut() {

@@ -46,22 +46,25 @@ public class BookList {
         return book;
     }
 
-    public void returnBook(String name) {
+    public Book returnBook(String name) {
         //1:search book from rentedBooks
         int index = searchBook(name,rentedBooks);
 
         //2:return book
-        returnBook(index);
+        return returnBook(index);
     }
 
-    private void returnBook(int index) {
+    private Book returnBook(int index) {
+        Book book = null;
         if (index == -1) {
             bookListView.showReturnFail();
         } else {
-            books.add(rentedBooks.get(index));
+            book = rentedBooks.get(index);
+            books.add(book);
             rentedBooks.remove(index);
             bookListView.showReturnSuccess();
         }
+        return book;
     }
 
     private int searchBook(String name,List<Book> target) {
