@@ -55,9 +55,10 @@ public class BookListTest {
 
     @Test
     public void testCheckOutBookFail() {
-        controller.checkOutBook("Book9");
+        Book book = controller.checkOutBook("Book9");
         String fail = "That book is not available.\n";
         assertEquals(systemOut(), fail);
+        assertNull(book);
     }
 
     @Test
