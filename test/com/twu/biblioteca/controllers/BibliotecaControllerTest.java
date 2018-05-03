@@ -1,16 +1,18 @@
 package com.twu.biblioteca.controllers;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import com.twu.biblioteca.core.Book;
 import com.twu.biblioteca.core.BookList;
+import com.twu.biblioteca.core.User;
+import com.twu.biblioteca.core.UserList;
+import com.twu.biblioteca.exception.LibraryNumberException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,10 +28,10 @@ public class BibliotecaControllerTest {
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Before
-    public void setUp() {
+    public void setUp() throws LibraryNumberException {
         System.setOut(new PrintStream(outContent));
 
-        //book list
+        //book lists
         List<Book> books = new ArrayList<>();
         books.add(new Book("Book1","Jack",2000));
         books.add(new Book("Book2","Jim",1990));
@@ -38,14 +40,22 @@ public class BibliotecaControllerTest {
         //rented book list
         List<Book> rentedBooks = new ArrayList<>();
         rentedBooks.add(new Book("Book9","Jack1",2000));
-        controller = new BibliotecaController(new BookList(books,rentedBooks));
+
+        //movie lists
+        User user1 = User.createUser("123-4567", "123456");
+        User user2 = User.createUser("123-4568", "123456");
+        List<User> users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        UserList userList = new UserList(users);
+        controller = new BibliotecaController(new BookList(books,rentedBooks),userList);
 
     }
 
     @Test
     public void testBegin() {
         String result = "Welcome Biblioteca!\n1:List Books\n2:Return Book\n" +
-                "3:List Movies\n4:Return Movie\n0:Quit\n";
+                "3:List Movies\n4:Return Movie\n5:User Info\n0:Quit\n";
         controller.begin();
         assertEquals(systemOut(), result);
     }
@@ -86,6 +96,7 @@ public class BibliotecaControllerTest {
         assertTrue(controller.needReturnMovie("4"));
         assertFalse(controller.needReturnMovie("0"));
     }
+
 
 
 

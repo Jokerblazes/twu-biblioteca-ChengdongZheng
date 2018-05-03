@@ -1,11 +1,12 @@
 package com.twu.biblioteca.controllers;
 
-import com.twu.biblioteca.core.BookList;
+import com.twu.biblioteca.core.*;
 import com.twu.biblioteca.views.BibliotecaView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * @Author Joker
@@ -15,17 +16,30 @@ import java.io.InputStreamReader;
 public class BibliotecaController {
     private BibliotecaView bibliotecaView = new BibliotecaView();
     private BookList bookList;
+    private UserList userList;
+    private MovieList movieList;
     private BufferedReader bufferedReader;
+    private String currentLibraryNumber;
 
     {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    public BibliotecaController(BookList bookList, UserList userList, MovieList movieList) {
+        this.bookList = bookList;
+        this.userList = userList;
+        this.movieList = movieList;
+    }
+
+    public BibliotecaController(BookList bookList, UserList userList) {
+        this(bookList, userList,new MovieList(new ArrayList<>()));
     }
 
     public BibliotecaController() {
     }
 
     public BibliotecaController(BookList bookList) {
-        this.bookList = bookList;
+        this(bookList, new UserList(new ArrayList<>()),new MovieList(new ArrayList<>()));
     }
 
     public void begin() {
@@ -35,7 +49,8 @@ public class BibliotecaController {
 
 
     public boolean validate(String input) {
-        return needQuit(input) || needEnterBookList(input) || needReturnBook(input);
+        return needQuit(input) || needEnterBookList(input) || needReturnBook(input)
+                || needEnterMovieList(input) || needReturnMovie(input) || needShowUserInfo(input);
     }
 
     public boolean needQuit(String input) {
@@ -52,6 +67,7 @@ public class BibliotecaController {
 
 
     public void start() throws IOException {
+        //begin
         begin();
 
         String input = bufferedReader.readLine();
@@ -62,9 +78,20 @@ public class BibliotecaController {
 
         returnBook(input);
 
+        enterMovieList(input);
+
+        returnMovie(input);
+
+        showUserInfo(input);
+
         showInvalidMenuOptionMessage(input);
 
         start();
+    }
+
+    private void showUserInfo(String input) {
+        if (needShowUserInfo(input))
+            userList.getUserByLibraryNumber(currentLibraryNumber).showInfo();
     }
 
     private void showInvalidMenuOptionMessage(String input) {
@@ -74,14 +101,35 @@ public class BibliotecaController {
 
     private void returnBook(String input) throws IOException {
         if (needReturnBook(input)) {
-            bookList.returnBook(bufferedReader.readLine());
+            Book book = bookList.returnBook(bufferedReader.readLine());
+            if (book != null)
+                userList.getUserByLibraryNumber(currentLibraryNumber).removeBook(book);
         }
     }
 
     private void enterBookList(String input) throws IOException {
         if (needEnterBookList(input)) {
             bookList.showBookList();
-            bookList.checkOutBook(bufferedReader.readLine());
+            Book book = bookList.checkOutBook(bufferedReader.readLine());
+            if (book != null)
+                userList.getUserByLibraryNumber(currentLibraryNumber).addBook(book);
+        }
+    }
+
+    private void enterMovieList(String input) throws IOException {
+        if (needEnterMovieList(input)) {
+            movieList.showMovies();
+            Movie movie = movieList.checkOutMovie(bufferedReader.readLine());
+            if (movie != null)
+                userList.getUserByLibraryNumber(currentLibraryNumber).addMovie(movie);
+        }
+    }
+
+    private void returnMovie(String input) throws IOException {
+        if (needReturnMovie(input)) {
+            Movie movie = movieList.returnMovie(bufferedReader.readLine());
+            if (movie != null)
+                userList.getUserByLibraryNumber(currentLibraryNumber).removeMovie(movie);
         }
     }
 
@@ -92,4 +140,22 @@ public class BibliotecaController {
     public boolean needReturnMovie(String input) {
         return "4".equals(input);
     }
+
+    public boolean needShowUserInfo(String input) {
+        return "5".equals(input);
+    }
+
+    public void login() throws IOException {
+        bibliotecaView.showLoginMessage();
+        String libraryNumber = bufferedReader.readLine();
+        String password = bufferedReader.readLine();
+        String result = userList.login(libraryNumber, password);
+        System.out.println(result);
+        if (!result.equals(LoginStatus.SUCCESS)) {
+            login();
+        } else {
+            currentLibraryNumber = libraryNumber;
+        }
+    }
+
 }
