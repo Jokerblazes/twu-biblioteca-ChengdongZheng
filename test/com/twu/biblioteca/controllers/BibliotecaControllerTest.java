@@ -44,7 +44,8 @@ public class BibliotecaControllerTest {
 
     @Test
     public void testBegin() {
-        String result = "Welcome Biblioteca!\n1:List Books\n2:Return Book\n0:Quit\n";
+        String result = "Welcome Biblioteca!\n1:List Books\n2:Return Book\n" +
+                "3:List Movies\n4:Return Movie\n0:Quit\n";
         controller.begin();
         assertEquals(systemOut(), result);
     }

@@ -12,7 +12,8 @@ public class BibliotecaView {
     }
 
     public void showMainMenu() {
-        System.out.println("1:List Books\n2:Return Book\n0:Quit");
+        System.out.println("1:List Books\n2:Return Book\n" +
+                "3:List Movies\n4:Return Movie\n0:Quit");
     }
 
     public void invalidMenuOptionMessage() {
