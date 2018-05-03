@@ -116,6 +116,23 @@ public class UserTest {
         assertEquals(user.getBooks().size(),0);
     }
 
+    @Test
+    public void testRemoveMovie() {
+        // create a user
+        User user = null;
+        try {
+            user = User.createUser("xxx-xxxx","123456");
+            assertTrue(true);
+        } catch (LibraryNumberException e) {
+            assertTrue(false);
+        }
+        Movie movie = new Movie("Name1",1,"Tim");
+        user.addMovie(movie);
+        assertEquals(user.getMovies().size(),1);
+        user.removeMovie(movie);
+        assertEquals(user.getMovies().size(),0);
+    }
+
     private String systemOut() {
         return outContent.toString();
     }
