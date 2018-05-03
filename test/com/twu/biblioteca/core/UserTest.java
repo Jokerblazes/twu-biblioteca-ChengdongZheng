@@ -99,6 +99,22 @@ public class UserTest {
         assertEquals(user.getMovies().get(0),movie);
     }
 
+    @Test
+    public void testRemoveBook() {
+        // create a user
+        User user = null;
+        try {
+            user = User.createUser("xxx-xxxx","123456");
+            assertTrue(true);
+        } catch (LibraryNumberException e) {
+            assertTrue(false);
+        }
+        Book book = new Book("Name1", "Jim", 1990);
+        user.addBook(book);
+        assertEquals(user.getBooks().size(),1);
+        user.removeBook(book);
+        assertEquals(user.getBooks().size(),0);
+    }
 
     private String systemOut() {
         return outContent.toString();

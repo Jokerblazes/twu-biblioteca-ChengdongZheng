@@ -83,6 +83,11 @@ public class User {
         movies.add(movie);
     }
 
+    public void removeBook(Book book) {
+        books.remove(book);
+    }
+
+
     public List<Book> getBooks() {
         return books;
     }
