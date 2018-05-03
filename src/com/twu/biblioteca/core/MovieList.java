@@ -27,19 +27,22 @@ public class MovieList {
         view.showMovies(movies);
     }
 
-    public void checkOutMovie(String name) {
+    public Movie checkOutMovie(String name) {
         int index = searchMovie(name,movies);
-        checkOutMovie(index);
+        return checkOutMovie(index);
     }
 
-    private void checkOutMovie(int index) {
+    private Movie checkOutMovie(int index) {
+        Movie movie = null;
         if (index == -1) {
             view.showCheckOutFail();
         } else {
-            rentedMovies.add(movies.get(index));
+            movie = movies.get(index);
+            rentedMovies.add(movie);
             movies.remove(index);
             view.showCheckOutSuccess();
         }
+        return movie;
     }
 
     private int searchMovie(String name,List<Movie> target) {
@@ -51,21 +54,24 @@ public class MovieList {
         return -1;
     }
 
-    public void returnMovie(String name) {
+    public Movie returnMovie(String name) {
         int index = searchMovie(name,rentedMovies);
 
-        returnMovie(index);
+        return returnMovie(index);
 
     }
 
-    private void returnMovie(int index) {
+    private Movie returnMovie(int index) {
+        Movie movie = null;
         if (index == -1) {
             view.showReturnFail();
         } else {
-            movies.add(rentedMovies.get(index));
+            movie = rentedMovies.get(index);
+            movies.add(movie);
             rentedMovies.remove(index);
             view.showReturnSuccess();
         }
+        return movie;
     }
 
 

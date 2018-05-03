@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -47,30 +48,34 @@ public class MovieListTest {
 
     @Test
     public void testCheckOutMovieSuccess() {
-        movieList.checkOutMovie("Name1");
+        Movie movie = movieList.checkOutMovie("Name1");
         String success = "Thank you! Enjoy the Movie\n";
         assertEquals(systemOut(), success);
+        assertEquals(movie.getName(),"Name1");
     }
 
     @Test
     public void testCheckOutMovieFail() {
-        movieList.checkOutMovie("Name5");
+        Movie movie = movieList.checkOutMovie("Name5");
         String fail = "That Movie is not available.\n";
         assertEquals(systemOut(), fail);
+        assertNull(movie);
     }
 
     @Test
     public void testReturnMovieSuccess() {
-        movieList.returnMovie("Name4");
+        Movie movie = movieList.returnMovie("Name4");
         String success = "Thank you for returning the movie.\n";
         assertEquals(systemOut(), success);
+        assertEquals(movie.getName(),"Name4");
     }
 
     @Test
     public void testReturnMovieFail() {
-        movieList.returnMovie("Name5");
+        Movie movie = movieList.returnMovie("Name5");
         String fail = "That is not a valid movie to return.\n";
         assertEquals(systemOut(), fail);
+        assertNull(movie);
     }
 
     private String systemOut() {
