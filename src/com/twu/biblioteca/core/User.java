@@ -48,6 +48,26 @@ public class User {
         this.email = email;
     }
 
+    public String getLibraryNumber() {
+        return libraryNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void showInfo() {
         System.out.println(name + "  " + email + "  " + phoneNumber);
     }
