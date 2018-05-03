@@ -40,6 +40,12 @@ public class UserListTest {
         assertEquals(accountError, LoginStatus.ACCOUNT_ERROR);
     }
 
+    @Test
+    public void testGetUserByLibraryNumber() {
+        User user = userList.getUserByLibraryNumber("123-4567");
+        assertEquals(user.getLibraryNumber(),"123-4567");
+    }
+
 
 
 }

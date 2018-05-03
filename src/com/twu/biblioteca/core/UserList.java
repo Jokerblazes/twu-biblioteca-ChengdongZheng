@@ -27,4 +27,12 @@ public class UserList {
     }
 
 
+    public User getUserByLibraryNumber(String libraryNumber) {
+        for (User user:
+             users) {
+            if (user.getLibraryNumber().equals(libraryNumber))
+                return user;
+        }
+        return null;
+    }
 }
