@@ -67,6 +67,38 @@ public class UserTest {
         assertEquals(systemOut(),"Tim  1234566@outlook.com  12345678\n");
     }
 
+    @Test
+    public void testAddBook() {
+        // create a user
+        User user = null;
+        try {
+            user = User.createUser("xxx-xxxx","123456");
+            assertTrue(true);
+        } catch (LibraryNumberException e) {
+            assertTrue(false);
+        }
+        Book book = new Book("Name1", "Jim", 1990);
+        user.addBook(book);
+        assertEquals(user.getBooks().size(),1);
+        assertEquals(user.getBooks().get(0),book);
+    }
+
+    @Test
+    public void testAddMovie() {
+        // create a user
+        User user = null;
+        try {
+            user = User.createUser("xxx-xxxx","123456");
+            assertTrue(true);
+        } catch (LibraryNumberException e) {
+            assertTrue(false);
+        }
+        Movie movie = new Movie("Name1",1,"Tim");
+        user.addMovie(movie);
+        assertEquals(user.getMovies().size(),1);
+        assertEquals(user.getMovies().get(0),movie);
+    }
+
 
     private String systemOut() {
         return outContent.toString();

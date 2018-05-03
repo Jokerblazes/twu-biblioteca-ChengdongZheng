@@ -2,6 +2,9 @@ package com.twu.biblioteca.core;
 
 import com.twu.biblioteca.exception.LibraryNumberException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author Joker
  * @Description
@@ -14,10 +17,14 @@ public class User {
     private String phoneNumber;
     private String name;
     private String email;
+    private List<Book> books;
+    private List<Movie> movies;
 
     public User(String libraryNumber, String password) {
         this.libraryNumber = libraryNumber;
         this.password = password;
+        books = new ArrayList<>();
+        movies = new ArrayList<>();
     }
 
     public static boolean validate(String libraryNumber) {
@@ -66,6 +73,22 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
     }
 
     public void showInfo() {
