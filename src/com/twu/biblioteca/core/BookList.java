@@ -2,6 +2,7 @@ package com.twu.biblioteca.core;
 
 import com.twu.biblioteca.core.Book;
 import com.twu.biblioteca.views.BookListView;
+import com.twu.biblioteca.views.BorrowListView;
 
 import java.util.List;
 
@@ -10,69 +11,84 @@ import java.util.List;
  * @Description
  * @Date Create in 下午4:00 2018/4/26
  */
-public class BookList {
-    private BookListView bookListView = new BookListView();
-    private List<Book> books;
-    private List<Book> rentedBooks;
-
-    public BookList(List<Book> books,List<Book> rentedBooks) {
-        this.books = books;
-        this.rentedBooks = rentedBooks;
+public class BookList extends BorrowObject<Book> {
+    public BookList() {
+        super(new BookListView());
     }
 
-    public void showBookList() {
-        bookListView.showHead();
-        bookListView.showBookList(books);
+
+    public BookList(List<Book> books, List<Book> rentedBooks) {
+        super(books,rentedBooks,new BookListView());
     }
 
-    public Book checkOutBook(String name) {
-        //1:search book from books
-        int index = searchBook(name, books);
+    //    private BookListView bookListView = new BookListView();
+//    private List<Book> books;
+//    private List<Book> rentedBooks;
+//
+//    public BookList(List<Book> books,List<Book> rentedBooks) {
+//        this.books = books;
+//        this.rentedBooks = rentedBooks;
+//    }
+//
+//    public void showBookList() {
+//        bookListView.showHead();
+//        bookListView.showBookList(books);
+//    }
 
-        //2:check out book
-        return checkOutBook(index);
-    }
+//    public Book checkOutBook(String name) {
+//        //1:search book from books
+//        int index = searchBook(name, books);
+//
+//        //2:check out book
+//        return checkOutBook(index);
+//    }
+//
+//    private Book checkOutBook(int index) {
+//        Book book = null;
+//        if (index == -1) {
+//            bookListView.showCheckOutFail();
+//        } else {
+//            book = books.get(index);
+//            rentedBooks.add(book);
+//            books.remove(index);
+//            bookListView.showCheckOutSuccess();
+//        }
+//        return book;
+//    }
+//
+//    public Book returnBook(String name) {
+//        //1:search book from rentedBooks
+//        int index = searchBook(name,rentedBooks);
+//
+//        //2:return book
+//        return returnBook(index);
+//    }
+//
+//    private Book returnBook(int index) {
+//        Book book = null;
+//        if (index == -1) {
+//            bookListView.showReturnFail();
+//        } else {
+//            book = rentedBooks.get(index);
+//            books.add(book);
+//            rentedBooks.remove(index);
+//            bookListView.showReturnSuccess();
+//        }
+//        return book
+//    }
+//
+//    private int searchBook(String name,List<Book> target) {
+//        for (int i = 0; i < target.size(); i++) {
+//            if (target.get(i).getName().equals(name)) {
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
 
-    private Book checkOutBook(int index) {
-        Book book = null;
-        if (index == -1) {
-            bookListView.showCheckOutFail();
-        } else {
-            book = books.get(index);
-            rentedBooks.add(book);
-            books.remove(index);
-            bookListView.showCheckOutSuccess();
-        }
-        return book;
-    }
 
-    public Book returnBook(String name) {
-        //1:search book from rentedBooks
-        int index = searchBook(name,rentedBooks);
-
-        //2:return book
-        return returnBook(index);
-    }
-
-    private Book returnBook(int index) {
-        Book book = null;
-        if (index == -1) {
-            bookListView.showReturnFail();
-        } else {
-            book = rentedBooks.get(index);
-            books.add(book);
-            rentedBooks.remove(index);
-            bookListView.showReturnSuccess();
-        }
-        return book;
-    }
-
-    private int searchBook(String name,List<Book> target) {
-        for (int i = 0; i < target.size(); i++) {
-            if (target.get(i).getName().equals(name)) {
-                return i;
-            }
-        }
-        return -1;
+    @Override
+    protected boolean compare(Book thing, String name) {
+        return thing.getName().equals(name);
     }
 }

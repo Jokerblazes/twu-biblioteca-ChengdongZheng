@@ -101,7 +101,7 @@ public class BibliotecaController {
 
     private void returnBook(String input) throws IOException {
         if (needReturnBook(input)) {
-            Book book = bookList.returnBook(bufferedReader.readLine());
+            Book book = bookList.returnThing(bufferedReader.readLine());
             if (book != null)
                 userList.getUserByLibraryNumber(currentLibraryNumber).removeBook(book);
         }
@@ -109,8 +109,8 @@ public class BibliotecaController {
 
     private void enterBookList(String input) throws IOException {
         if (needEnterBookList(input)) {
-            bookList.showBookList();
-            Book book = bookList.checkOutBook(bufferedReader.readLine());
+            bookList.showThings();
+            Book book = bookList.checkOutThing(bufferedReader.readLine());
             if (book != null)
                 userList.getUserByLibraryNumber(currentLibraryNumber).addBook(book);
         }
@@ -118,8 +118,8 @@ public class BibliotecaController {
 
     private void enterMovieList(String input) throws IOException {
         if (needEnterMovieList(input)) {
-            movieList.showMovies();
-            Movie movie = movieList.checkOutMovie(bufferedReader.readLine());
+            movieList.showThings();
+            Movie movie = movieList.checkOutThing(bufferedReader.readLine());
             if (movie != null)
                 userList.getUserByLibraryNumber(currentLibraryNumber).addMovie(movie);
         }
@@ -127,7 +127,7 @@ public class BibliotecaController {
 
     private void returnMovie(String input) throws IOException {
         if (needReturnMovie(input)) {
-            Movie movie = movieList.returnMovie(bufferedReader.readLine());
+            Movie movie = movieList.returnThing(bufferedReader.readLine());
             if (movie != null)
                 userList.getUserByLibraryNumber(currentLibraryNumber).removeMovie(movie);
         }

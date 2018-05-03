@@ -38,7 +38,7 @@ public class BookListTest {
 
     @Test
     public void testShowBookList() {
-        controller.showBookList();
+        controller.showThings();
         assertEquals(systemOut(),"Name  Author  Year\n" +
                 "Book1  Jack  2000\n" +
                 "Book2  Jim  1990\n" +
@@ -47,7 +47,7 @@ public class BookListTest {
 
     @Test
     public void testCheckOutBookSuccess() {
-        Book book = controller.checkOutBook("Book1");
+        Book book = controller.checkOutThing("Book1");
         String success = "Thank you! Enjoy the book\n";
         assertEquals(systemOut(), success);
         assertEquals(book.getName(),"Book1");
@@ -55,7 +55,7 @@ public class BookListTest {
 
     @Test
     public void testCheckOutBookFail() {
-        Book book = controller.checkOutBook("Book9");
+        Book book = controller.checkOutThing("Book9");
         String fail = "That book is not available.\n";
         assertEquals(systemOut(), fail);
         assertNull(book);
@@ -63,7 +63,7 @@ public class BookListTest {
 
     @Test
     public void testReturnBookSuccess() {
-        Book book = controller.returnBook("Book9");
+        Book book = controller.returnThing("Book9");
         String success = "Thank you for returning the book.\n";
         assertEquals(systemOut(),success);
         assertEquals(book.getName(),"Book9");
@@ -72,7 +72,7 @@ public class BookListTest {
     @Test
     public void testReturnBookFail() {
         String fail = "That is not a valid book to return.\n";
-        Book book = controller.returnBook("Book10");
+        Book book = controller.returnThing("Book10");
         assertEquals(systemOut(), fail);
         assertNull(book);
     }

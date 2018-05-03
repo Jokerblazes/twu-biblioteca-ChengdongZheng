@@ -40,31 +40,32 @@ public class MovieListTest {
 
     @Test
     public void testShowMovieList() {
-        movieList.showMovies();
-        assertEquals(systemOut(),"Name1  Director1  2001  1\n" +
+        movieList.showThings();
+        assertEquals(systemOut(),"Name  Director  Year  Rate\n" +
+                "Name1  Director1  2001  1\n" +
                 "Name2  Director2  2002  2\n" +
                 "Name3  Director3  2003  unrated\n");
     }
 
     @Test
     public void testCheckOutMovieSuccess() {
-        Movie movie = movieList.checkOutMovie("Name1");
-        String success = "Thank you! Enjoy the Movie\n";
+        Movie movie = movieList.checkOutThing("Name1");
+        String success = "Thank you! Enjoy the movie\n";
         assertEquals(systemOut(), success);
         assertEquals(movie.getName(),"Name1");
     }
 
     @Test
     public void testCheckOutMovieFail() {
-        Movie movie = movieList.checkOutMovie("Name5");
-        String fail = "That Movie is not available.\n";
+        Movie movie = movieList.checkOutThing("Name5");
+        String fail = "That movie is not available.\n";
         assertEquals(systemOut(), fail);
         assertNull(movie);
     }
 
     @Test
     public void testReturnMovieSuccess() {
-        Movie movie = movieList.returnMovie("Name4");
+        Movie movie = movieList.returnThing("Name4");
         String success = "Thank you for returning the movie.\n";
         assertEquals(systemOut(), success);
         assertEquals(movie.getName(),"Name4");
@@ -72,7 +73,7 @@ public class MovieListTest {
 
     @Test
     public void testReturnMovieFail() {
-        Movie movie = movieList.returnMovie("Name5");
+        Movie movie = movieList.returnThing("Name5");
         String fail = "That is not a valid movie to return.\n";
         assertEquals(systemOut(), fail);
         assertNull(movie);
