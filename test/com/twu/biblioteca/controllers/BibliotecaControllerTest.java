@@ -74,6 +74,18 @@ public class BibliotecaControllerTest {
         assertFalse(controller.needReturnBook("0"));
     }
 
+    @Test
+    public void testNeedEnterMovieList() {
+        assertTrue(controller.needEnterMovieList("3"));
+        assertFalse(controller.needEnterMovieList("0"));
+    }
+
+    @Test
+    public void testIsReturnMovie() {
+        assertTrue(controller.needReturnMovie("4"));
+        assertFalse(controller.needReturnMovie("0"));
+    }
+
 
 
     private String systemOut() {

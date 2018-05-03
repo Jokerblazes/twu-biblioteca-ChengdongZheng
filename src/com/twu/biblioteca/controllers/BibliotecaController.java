@@ -84,4 +84,12 @@ public class BibliotecaController {
             bookList.checkOutBook(bufferedReader.readLine());
         }
     }
+
+    public boolean needEnterMovieList(String input) {
+        return "3".equals(input);
+    }
+
+    public boolean needReturnMovie(String input) {
+        return "4".equals(input);
+    }
 }
