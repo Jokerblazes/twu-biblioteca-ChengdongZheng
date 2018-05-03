@@ -25,22 +25,25 @@ public class BookList {
         bookListView.showBookList(books);
     }
 
-    public void checkOutBook(String name) {
+    public Book checkOutBook(String name) {
         //1:search book from books
         int index = searchBook(name, books);
 
         //2:check out book
-        checkOutBook(index);
+        return checkOutBook(index);
     }
 
-    private void checkOutBook(int index) {
+    private Book checkOutBook(int index) {
+        Book book = null;
         if (index == -1) {
             bookListView.showCheckOutFail();
         } else {
-            rentedBooks.add(books.get(index));
+            book = books.get(index);
+            rentedBooks.add(book);
             books.remove(index);
             bookListView.showCheckOutSuccess();
         }
+        return book;
     }
 
     public void returnBook(String name) {

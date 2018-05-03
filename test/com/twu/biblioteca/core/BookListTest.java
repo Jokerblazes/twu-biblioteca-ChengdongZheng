@@ -47,9 +47,10 @@ public class BookListTest {
 
     @Test
     public void testCheckOutBookSuccess() {
-        controller.checkOutBook("Book1");
+        Book book = controller.checkOutBook("Book1");
         String success = "Thank you! Enjoy the book\n";
         assertEquals(systemOut(), success);
+        assertEquals(book.getName(),"Book1");
     }
 
     @Test
